@@ -2,26 +2,28 @@ import dayjs from "dayjs";
 
 import { openingHours } from "../../utils/opening-hours.js";
 
-export function hoursLoad({ date, dailySchedules }) {
+const hours = document.getElementById("hours");
+
+export function hoursLoad({ date }) {
   //Limpa os horários
-  hours.innerHTML = "";
+  // hours.innerHTML = "";
 
   //Obtem os horários ocupados.
-  const unavailableHours = dailySchedules.map((schedule) =>
-    dayjs(schedule.when).format("HH:mm"),
-  );
+  // const unavailableHours = dailySchedules.map((schedule) =>
+  //   dayjs(schedule.when).format("HH:mm"),
+  // );
 
   const opening = openingHours.map((hour) => {
     //Recupera somente a hora
     const [scheduleHour] = hour.split(":");
 
     //Adiciona a hora na data e verifica se está no passado
-    const isHourPast = dayjs(date).add(scheduleHour, "hour").isBefore(dayjs());
+    const isHourPast = dayjs(date).add(scheduleHour, "hour").isAfter(dayjs());
 
-    const available = !unavailableHours.includes(hour) && !isHourPast;
+    // const available = !unavailableHours.includes(hour) && !isHourPast;
     return {
       hour,
-      available,
+      available: isHourPast,
     };
   });
 
@@ -31,6 +33,22 @@ export function hoursLoad({ date, dailySchedules }) {
     li.classList.add(available ? "hour-available" : "hour-unavailable");
 
     li.textContent = hour;
+
+    if (hour === "9:00") {
+      hourHeaderAdd("Manhã");
+    } else if (hour === "13:00") {
+      hourHeaderAdd("Tarde");
+    } else if (hour === "19:00") {
+      hourHeaderAdd("Noite");
+    }
     hours.append(li);
   });
+}
+
+function hourHeaderAdd(title) {
+  const header = document.createElement("li");
+  header.classList.add("hour-period");
+  header.textContent = title;
+
+  hours.append(header);
 }
