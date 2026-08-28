@@ -7,7 +7,7 @@ const hours = document.getElementById("hours");
 
 export function hoursLoad({ date }) {
   //Limpa os horários
-  // hours.innerHTML = "";
+  hours.innerHTML = "";
 
   //Obtem os horários ocupados.
   // const unavailableHours = dailySchedules.map((schedule) =>
