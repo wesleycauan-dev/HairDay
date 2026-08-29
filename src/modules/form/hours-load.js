@@ -1,6 +1,7 @@
 import dayjs from "dayjs";
 
 import { openingHours } from "../../utils/opening-hours.js";
+
 import { hoursClick } from "./hours-click.js";
 
 const hours = document.getElementById("hours");
@@ -9,7 +10,7 @@ export function hoursLoad({ date, dailySchedules }) {
   //Limpa os horários
   hours.innerHTML = "";
 
-  // Obtem os horarios ocupados
+  //Obtem os horários ocupados.
   const unavailableHours = dailySchedules.map((schedule) =>
     dayjs(schedule.when).format("HH:mm"),
   );
@@ -22,7 +23,6 @@ export function hoursLoad({ date, dailySchedules }) {
     const isHourPast = dayjs(date).add(scheduleHour, "hour").isBefore(dayjs());
 
     const available = !unavailableHours.includes(hour) && !isHourPast;
-
     return {
       hour,
       available,
@@ -40,13 +40,14 @@ export function hoursLoad({ date, dailySchedules }) {
       hourHeaderAdd("Manhã");
     } else if (hour === "13:00") {
       hourHeaderAdd("Tarde");
-    } else if (hour === "19:00") {
+    } else if (hour === "18:00") {
       hourHeaderAdd("Noite");
     }
+
     hours.append(li);
   });
 
-  // Adicionando evento de clique nos horarios disponiveis
+  //   Adiciona o evento de click nas horas disponíveis
   hoursClick();
 }
 

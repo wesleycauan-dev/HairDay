@@ -1,6 +1,7 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
+// const { Template } = require("webpack");
 
 module.exports = {
   target: "web",
@@ -11,6 +12,7 @@ module.exports = {
     filename: "main.js",
     path: path.resolve(__dirname, "dist"),
   },
+
   devServer: {
     static: {
       directory: path.join(__dirname, "dist"),
@@ -19,6 +21,7 @@ module.exports = {
     open: true,
     liveReload: true,
   },
+
   plugins: [
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, "index.html"),
@@ -33,6 +36,7 @@ module.exports = {
       ],
     }),
   ],
+
   module: {
     rules: [
       {

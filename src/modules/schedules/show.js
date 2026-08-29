@@ -6,7 +6,7 @@ const periodNight = document.getElementById("period-night");
 
 export function schedulesShow({ dailySchedules }) {
   try {
-    // limpa os agendamentos
+    // Limpa os horários exibidos
     periodMorning.innerHTML = "";
     periodAfternoon.innerHTML = "";
     periodNight.innerHTML = "";
@@ -45,7 +45,7 @@ export function schedulesShow({ dailySchedules }) {
       }
     });
   } catch (error) {
-    alert("Não foi possivel exibir os agendamentos");
     console.log(error);
+    alert("Não foi possível exibir os agendamentos.");
   }
 }
