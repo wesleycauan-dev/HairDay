@@ -34,7 +34,10 @@ form.onsubmit = async (event) => {
 
     // Insire a hora na data
     const when = dayjs(selectedDate.value).add(hour, "hour");
+<<<<<<< HEAD
     console.log(when);
+=======
+>>>>>>> 7bae21d2ae6fa45f2bd5dc0fb1e0e7b69f527bc1
 
     const id = new Date().getTime();
 
